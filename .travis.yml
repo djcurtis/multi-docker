@@ -3,20 +3,20 @@ services:
     - docker
     
 before_install:
-    - docker build -t djcurtis/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t dcurso/react-test -f ./client/Dockerfile.dev ./client
     
 script:
-    - docker run djcurtis/react-test npm test -- --coverage
+    - docker run dcurso/react-test npm test -- --coverage
 
 after_success:
-    - docker build -t djcurtis/multi-client ./client
-    - docker build -t djcurtis/multi-nginx ./nginx
-    - docker build -t djcurtis/multi-server ./server
-    - docker build -t djcurtis/multi-worker ./worker    
+    - docker build -t dcurso/multi-client ./client
+    - docker build -t dcurso/multi-nginx ./nginx
+    - docker build -t dcurso/multi-server ./server
+    - docker build -t dcurso/multi-worker ./worker    
     # log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to docker hub
-    - docker push djcurtis/multi-client
-    - docker push djcurtis/multi-nginx
-    - docker push djcurtis/multi-server
-    - docker push djcurtis/multi-worker
+    - docker push dcurso/multi-client
+    - docker push dcurso/multi-nginx
+    - docker push dcurso/multi-server
+    - docker push dcurso/multi-worker
